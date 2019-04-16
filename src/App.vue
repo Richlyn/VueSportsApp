@@ -1,20 +1,29 @@
 <template>
   <div id="app">
-    <Header/>
+    <Head/>
     <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     >
-    <div class="topnav" id="myTopnav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/games">Games</router-link>|
-      <router-link to="/teamsinfo">Teams</router-link>|
-      <router-link to="/Countries">Represented Countries</router-link>|
-      <router-link to="/chat">Chat</router-link>
-      <a href="javascript:void(0);" class="icon" @onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-      </a>
+
+    <div class="topnav mt-5" id="myTopnav">
+      <a href="/" class="active">Home</a>
+      <a href="/games">Games</a>
+      <a href="/teamsinfo">Teams</a>
+      <a href="/countries">Countries</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Log In
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Already A Member</a>
+          <a href="#">Sign Up</a>
+        </div>
+      </div>
+      <a href="/chat">Chat</a>
+      <a href="javascript:void(0);" class="icon" v-on:click="myFunction">&#9776;</a>
     </div>
     <router-view/>
     <Footer/>
@@ -22,23 +31,24 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
+import Head from "@/components/Head.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   name: "App",
   components: {
-    Header,
+    Head,
     Footer
   },
   methods: {
     /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-    myFunction() {
-      var x = document.getElementById("myTopnav");
+    myFunction: () => {
+      let x = document.getElementById("myTopnav");
       if (x.className === "topnav") {
         x.className += " responsive";
       } else {
         x.className = "topnav";
       }
+      // myFunction();
     }
   }
 };
@@ -73,6 +83,61 @@ export default {
 .topnav a:hover {
   background-color: #ddd;
   color: black;
+}
+/* Dropdown container - needed to position the dropdown content */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Style the dropdown button to fit inside the topnav */
+.dropdown .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Style the links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a dark background on topnav links and the dropdown button on hover */
+.topnav a:hover,
+.dropdown:hover .dropbtn {
+  background-color: #555;
+  color: white;
+}
+
+/* Add a grey background to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Show the dropdown menu when the user moves the mouse over the dropdown button */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* Add an active class to highlight the current page */

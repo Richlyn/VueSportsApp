@@ -1,82 +1,73 @@
 <template>
   <div>
-    <b-carousel
-      id="carousel-1"
-      v-model="slide"
-      :interval="4000"
-      controls
-      indicators
-      background="#ababab"
-      img-width="1024"
-      img-height="480"
-      style="text-shadow: 1px 1px 2px #333;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
-    >
-      <!-- Text slides with image -->
-      <b-carousel-slide
-        caption="First slide"
-        text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-        img-src="https://picsum.photos/1024/480/?image=52"
-      ></b-carousel-slide>
-
-      <!-- Slides with custom text -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Hello world!</h1>
-      </b-carousel-slide>
-
-      <!-- Slides with image only -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
-
-      <!-- Slides with img slot -->
-      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-      <b-carousel-slide>
-        <img
-          slot="img"
-          class="d-block img-fluid w-100"
-          width="1024"
-          height="480"
-          src="https://picsum.photos/1024/480/?image=55"
-          alt="image slot"
-        >
-      </b-carousel-slide>
-
-      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-          a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
-    </b-carousel>
-
-    <p class="mt-4">
-      Team Name: {{ slide }}
-      <br>
-      Sliding: {{ sliding }}
-    </p>
-
-    <div>
-      <b-link href="#foo">Stadium</b-link>
+<div role="tablist">
+    <b-card no-body class="mb-1" v-for="team in teams" :key="team.id>
+      <b-card-header  role="tab">
+        <b-button  variant="info">{{team.name}}</b-button>
+      </b-card-header>
+      <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <b-card-text><img :src="team.crestUrl">
+            {{team.website}},
+            {{team.venue}}</b-card-text>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
     </div>
   </div>
+
+  
 </template>
 
 <script>
 export default {
+  name: "teamsinfo",
   data() {
     return {
-      slide: 0,
-      sliding: null
+      urlTeams: "https://api.football-data.org/v2/competitions/2018/teams/",
+      proxyUrl: "https://cors-anywhere.herokuapp.com/",
+      teams: []
     };
   },
   methods: {
-    onSlideStart(slide) {
-      this.sliding = true;
-    },
-    onSlideEnd(slide) {
-      this.sliding = false;
+    getData(url) {
+      fetch(url, {
+        headers: {
+          "X-Auth-Token": "f26182bf51aa480087e9c34b04cd7e48",
+          "Content-Type": "application/json"
+        }
+        // mode: "no-cors"
+      })
+        .then(response => {
+          // eslint-disable-next-line
+          console.log("hello");
+          console.log(response);
+          return response.json();
+        })
+
+        .then(data => {
+          this.teams = data.teams; //pulls the match with index 0
+          // eslint-disable-next-line
+          console.log("i fetched" + data);
+          console.log("teams", this.teams);
+        })
+        // eslint-disable-next-line
+        .catch(err => console.log(err));
     }
+  },
+  //find way to join mounting using ( includes & titles )
+  mounted() {
+    this.getData(this.proxyUrl + this.urlTeams);
   }
 };
 </script>
+
+<style>
+img {
+  width: 95%;
+}
+.collapsed > .when-opened,
+:not(.collapsed) > .when-closed {
+  display: none;
+}
+</style>
