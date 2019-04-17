@@ -9,8 +9,7 @@
                 <h1>&#9819;</h1>
               </div>
               <div class="flip-card-back">
-                <p>EUFA</p>
-                <p>Champion's League</p>
+                <p>EUFA Champion's League</p>
               </div>
             </div>
           </div>
@@ -68,8 +67,9 @@ export default {
 /* Style the back side */
 
 .flip-card-back {
-  background-color: black;
-  color: white;
+  color: black;
+  width: 200px;
   transform: rotateY(180deg);
+  z-index: 2;
 }
 </style>

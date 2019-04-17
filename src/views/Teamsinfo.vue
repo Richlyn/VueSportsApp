@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div>
+    <div v-for="team in teams" :key="team.id">
       <b-button v-b-toggle.collapse-1 variant="primary">{{team.name}}</b-button>
       <b-collapse id="collapse-1" class="mt-2">
-        <b-card v-for="team in teams" :key="team.id">
+        <b-card>
           <p class="card-text">
             <img :src="team.crestUrl">
-            Team website: {{team.website}},
+            Team website:{{team.website}},
             Team Stadium:{{team.venue}}
           </p>
-          <b-button v-b-toggle.collapse-1-inner size="sm">Players</b-button>
+          <b-button v-b-toggle.collapse-1-inner size="sm" v-on:click="players(team)">Players</b-button>
           <b-collapse id="collapse-1-inner" class="mt-2">
-            <b-card v-for="squad in teams" :key="squad.id">
-              <label>Name:</label>
+            <b-card v-for="squad in squad" :key="squad.id">
+              Name:
               {{squad.id}}
-              <label>Position:</label>
+              Position:
               {{squad.position}}
-              <label>Country of Birth:</label>
+              Country of Birth:
               {{squad.countryOfBirth}}
             </b-card>
           </b-collapse>
@@ -32,9 +32,11 @@ export default {
   data() {
     return {
       urlTeams: "https://api.football-data.org/v2/competitions/2018/teams/",
-      urlSquad: "https://api.football-data.org/v2/teams/759",
+      // urlSquad: "https://api.football-data.org/v2/teams/759",
+      urlSquad: "https://api.football-data.org/v2/teams/",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
       teams: [],
+      id_teams: null,
       squad: []
     };
   },
@@ -56,22 +58,50 @@ export default {
 
         .then(data => {
           this.teams = data.teams; //pulls the match with index 0
-          this.squad = data.squad;
+          //    this.squad = data.squad;
           // eslint-disable-next-line
           console.log("i fetched" + data);
           // eslint-disable-next-line
           console.log("teams", this.teams);
           // eslint-disable-next-line
-          console.log("squad", this.squad);
+          //    console.log("squad", this.squad);
         })
         // eslint-disable-next-line
         .catch(err => console.log(err));
+    },
+
+    getDataPlayers: url => {
+      fetch(url, {
+        headers: {
+          "X-Auth-Token": "f26182bf51aa480087e9c34b04cd7e48",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => {
+          // eslint-disable-next-line
+          console.log("hello");
+          // eslint-disable-next-line
+          console.log(response);
+          return response.json();
+        })
+
+        .then(data => {
+          // eslint-disable-next-line
+          console.log(data);
+        })
+        // eslint-disable-next-line
+        .catch(err => console.log(err));
+    },
+    players: team => {
+      // return (this.id_team = this.teams.id);
+      // eslint-disable-next-line
+      console.log(team.id);
+      // this.id_teams = team.id;
     }
   },
-  //find way to join mounting using ( includes & titles )
   mounted() {
     this.getData(this.proxyUrl + this.urlTeams);
-    this.getData(this.proxyUrl + this.urlSquad);
+    //this.getDataPlayers(this.urlSquad + team.id);
   }
 };
 </script>
