@@ -6,10 +6,10 @@
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="flip-card">
-                <h1>&#9819;</h1>
+                <img src="../assets/uefa.png">
               </div>
               <div class="flip-card-back">
-                <p>EUFA Champion's League</p>
+                <p>Champions League</p>
               </div>
             </div>
           </div>
@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style>
+img {
+  width: 100%;
+}
 .flip-card {
   background-color: transparent;
   width: 60px;
@@ -69,6 +72,7 @@ export default {
 .flip-card-back {
   color: black;
   width: 200px;
+  text-align: center;
   transform: rotateY(180deg);
   z-index: 2;
 }

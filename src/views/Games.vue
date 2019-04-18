@@ -6,48 +6,45 @@
             <b-dropdown-item href="#">teams</b-dropdown-item>
           </b-dropdown>
       </div>-->
-    </div>
-    <!--search bar-->
-    <div id="search" class="d-flex justify-content-end p-5">
-      <label style="height:0rem">
-        Search here:
-        <input type="text" v-model="search">
-      </label>
-    </div>
-    <div>
-      <div v-for="match in matches" :key="match.id">
-        <b-button v-b-toggle.collapse-1 variant="primary">{{match.group}}</b-button>
-        <b-collapse id="collapse-1" class="mt-2">
-          <b-card class="text-center">
-            <div class="card-text">
-              <div v-for="team in teams" :key="team.id">
-                <img :src="team.crestUrl">
-              </div>
-              <p>
-                Home {{match.homeTeam.name}} vs.
-                {{match.awayTeam.name}} Away
-              </p>
-              <div v-for="team in teams" :key="team.id">
-                <img :src="team.crestUrl">
-              </div>
-            </div>
-            <p>Match Day:{{match.utcDate}},</p>
-            <p>{{match.currectMatchday}}</p>
-            <p>{{match.status}}</p>
-            <b-button v-b-toggle.collapse-1-inner size="sm">Score</b-button>
-            <b-collapse id="collapse-1-inner" class="mt-2">
-              <b-card>
-                <p>Score:{{match.score.fullTime.homeTeam}}-{{match.score.fullTime.awayTeam}}</p>
-                <p>
-                  Winner:
-                  {{match.score.winner}}
-                </p>
-              </b-card>
-            </b-collapse>
-          </b-card>
-        </b-collapse>
+      <!--search bar-->
+      <iframe
+        width="100%"
+        height="315px"
+        src="https://www.youtube.com/embed/gJRsEQg9tbc"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <div id="search" class="d-flex justify-content-end p-5">
+        <label style="height:0rem">
+          Search here:
+          <input type="text" v-model="search">
+        </label>
       </div>
     </div>
+    <b-card-group deck>
+      <div v-for="match in matches" :key="match.id">
+        <b-card header>
+          {{match.stage}}
+          <b-list-group>
+            <b-list-group-item>
+              {{match.score.fullTime.homeTeam}} -
+              {{match.score.fullTime.awayTeam}}
+            </b-list-group-item>
+            <b-list-group-item href="#">{{match.homeTeam.name}} vs. {{match.awayTeam.name}}</b-list-group-item>
+            <b-list-group-item href="#">Match Day:{{match.utcDate}}</b-list-group-item>
+          </b-list-group>
+
+          <p class="card-text mt-2"></p>
+          <p>{{match.currectMatchday}}</p>
+          <p>{{match.status}}</p>
+          <p>
+            Winner:
+            {{match.score.winner}}
+          </p>
+        </b-card>
+      </div>
+    </b-card-group>
   </div>
 </template>
 
@@ -56,8 +53,10 @@ export default {
   name: "games",
   data() {
     return {
-      urlMatches: "https://api.football-data.org/v2/competitions/2018/matches/",
-      urlTeams: "https://api.football-data.org/v2/competitions/2018/teams",
+      slide: 0,
+      sliding: null,
+      urlMatches: "https://api.football-data.org/v2/competitions/CL/matches",
+      urlTeams: "https://api.football-data.org/v2/competitions/CL/teams",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
       matches: [],
       teams: [],
@@ -92,6 +91,12 @@ export default {
         })
         // eslint-disable-next-line
         .catch(err => console.log(err));
+    },
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
     }
   },
 

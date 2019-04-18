@@ -9,7 +9,7 @@
             Team website:{{team.website}},
             Team Stadium:{{team.venue}}
           </p>
-          <b-button v-b-toggle.collapse-1-inner size="sm" v-on:click="players(team)">Players</b-button>
+          <b-button v-b-toggle.collapse-1-inner size="sm" v-on:click="players()">Players</b-button>
           <b-collapse id="collapse-1-inner" class="mt-2">
             <b-card v-for="squad in squad" :key="squad.id">
               Name:
@@ -31,8 +31,7 @@ export default {
   name: "teamsinfo",
   data() {
     return {
-      urlTeams: "https://api.football-data.org/v2/competitions/2018/teams/",
-      // urlSquad: "https://api.football-data.org/v2/teams/759",
+      urlTeams: "https://api.football-data.org/v2/competitions/CL/teams",
       urlSquad: "https://api.football-data.org/v2/teams/",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
       teams: [],
@@ -88,12 +87,13 @@ export default {
         .then(data => {
           // eslint-disable-next-line
           console.log(data);
+          this.players(this.proxyUrl + this.urlSquad);
         })
         // eslint-disable-next-line
         .catch(err => console.log(err));
     },
     players: team => {
-      // return (this.id_team = this.teams.id);
+      return (this.id_team = this.teams.id);
       // eslint-disable-next-line
       console.log(team.id);
       // this.id_teams = team.id;
@@ -101,6 +101,7 @@ export default {
   },
   mounted() {
     this.getData(this.proxyUrl + this.urlTeams);
+
     //this.getDataPlayers(this.urlSquad + team.id);
   }
 };
