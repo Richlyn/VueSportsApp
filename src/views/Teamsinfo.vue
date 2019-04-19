@@ -4,20 +4,28 @@
       <b-button v-b-toggle.collapse-1 variant="primary">{{team.name}}</b-button>
       <b-collapse id="collapse-1" class="mt-2">
         <b-card>
-          <p class="card-text">
+          <div class="card-text">
             <img :src="team.crestUrl">
-            Team website:{{team.website}},
-            Team Stadium:{{team.venue}}
-          </p>
-          <b-button v-b-toggle.collapse-1-inner size="sm" v-on:click="players()">Players</b-button>
+            <a :src="team.website">Team website:{{team.website}}</a>
+            <p>Team Stadium:{{team.venue}}</p>
+          </div>
+          <b-button v-b-toggle.collapse-1-inner size="sm" v-on:click="players(team)">Players</b-button>
           <b-collapse id="collapse-1-inner" class="mt-2">
-            <b-card v-for="squad in squad" :key="squad.id">
-              Name:
-              {{squad.id}}
-              Position:
-              {{squad.position}}
-              Country of Birth:
-              {{squad.countryOfBirth}}
+            <b-card v-for="squad in squads" :key="squad.id">
+              <b-list-group>
+                <b-list-group-item button>
+                  Name:
+                  {{squad.name}}, ({{squad.shirtNumber}})
+                </b-list-group-item>
+                <b-list-group-item button>
+                  Position:
+                  {{squad.position}}
+                </b-list-group-item>
+                <b-list-group-item button disabled>
+                  Country of Birth:
+                  {{squad.countryOfBirth}}
+                </b-list-group-item>
+              </b-list-group>
             </b-card>
           </b-collapse>
         </b-card>
@@ -32,11 +40,11 @@ export default {
   data() {
     return {
       urlTeams: "https://api.football-data.org/v2/competitions/CL/teams",
-      urlSquad: "https://api.football-data.org/v2/teams/",
+      urlSquad: "",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
       teams: [],
       id_teams: null,
-      squad: []
+      squads: []
     };
   },
   methods: {
@@ -54,10 +62,8 @@ export default {
           console.log(response);
           return response.json();
         })
-
         .then(data => {
           this.teams = data.teams; //pulls the match with index 0
-          //    this.squad = data.squad;
           // eslint-disable-next-line
           console.log("i fetched" + data);
           // eslint-disable-next-line
@@ -68,8 +74,7 @@ export default {
         // eslint-disable-next-line
         .catch(err => console.log(err));
     },
-
-    getDataPlayers: url => {
+    getDataPlayers(url) {
       fetch(url, {
         headers: {
           "X-Auth-Token": "f26182bf51aa480087e9c34b04cd7e48",
@@ -78,7 +83,7 @@ export default {
       })
         .then(response => {
           // eslint-disable-next-line
-          console.log("hello");
+          console.log("hello 1");
           // eslint-disable-next-line
           console.log(response);
           return response.json();
@@ -87,22 +92,26 @@ export default {
         .then(data => {
           // eslint-disable-next-line
           console.log(data);
-          this.players(this.proxyUrl + this.urlSquad);
+          this.squads = data.squad;
         })
         // eslint-disable-next-line
         .catch(err => console.log(err));
     },
-    players: team => {
-      return (this.id_team = this.teams.id);
+    players(team) {
+      // eslint-disable-next-line
+      console.log(team);
       // eslint-disable-next-line
       console.log(team.id);
-      // this.id_teams = team.id;
+      this.getDataPlayers(
+        this.proxyUrl + "https://api.football-data.org/v2/teams/" + team.id
+      );
+      // eslint-disable-next-line
+      console.log(this.urlSquad);
     }
   },
   mounted() {
     this.getData(this.proxyUrl + this.urlTeams);
-
-    //this.getDataPlayers(this.urlSquad + team.id);
+    // this.players();
   }
 };
 </script>
@@ -110,5 +119,8 @@ export default {
 <style>
 img {
   width: 95%;
+}
+b-list-group-item {
+  text-align: center;
 }
 </style>

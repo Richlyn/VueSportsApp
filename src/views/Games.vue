@@ -1,20 +1,22 @@
 <template>
   <div>
-    <div class="filter">
-      <!-- <div>
+    <!-- <div>
           <b-dropdown split text="Teams" id="dropdown" class="m-2">
             <b-dropdown-item href="#">teams</b-dropdown-item>
           </b-dropdown>
-      </div>-->
-      <!--search bar-->
-      <iframe
-        width="100%"
-        height="315px"
-        src="https://www.youtube.com/embed/gJRsEQg9tbc"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+    </div>-->
+
+    <iframe
+      width="100%"
+      height="315px"
+      src="https://www.youtube.com/embed/gJRsEQg9tbc"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+
+    <!--search bar-->
+    <div class="filter">
       <div id="search" class="d-flex justify-content-end p-5">
         <label style="height:0rem">
           Search here:

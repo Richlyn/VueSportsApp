@@ -5,15 +5,12 @@
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <div class="flip-card">
-                <img src="../assets/uefa.png">
-              </div>
-              <div class="flip-card-back">
-                <p>Champions League</p>
-              </div>
+              <img src="../assets/uefa.png">
+            </div>
+            <div class="flip-card-back">
+              <p>Champions League</p>
             </div>
           </div>
-          <img>
         </div>
       </div>
     </div>
@@ -32,8 +29,8 @@ img {
 }
 .flip-card {
   background-color: transparent;
-  width: 60px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
 }
 
 .flip-card-inner {
@@ -71,7 +68,6 @@ img {
 
 .flip-card-back {
   color: black;
-  width: 200px;
   text-align: center;
   transform: rotateY(180deg);
   z-index: 2;

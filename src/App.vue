@@ -7,7 +7,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     >
 
-    <div class="topnav mt-5" id="myTopnav">
+    <div class="topnav" id="myTopnav">
       <a href="/" class="active">Home</a>
       <a href="/games">Games</a>
       <a href="/teamsinfo">Teams</a>
