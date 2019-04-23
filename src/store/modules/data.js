@@ -9,7 +9,7 @@ const getters={
 },
 
 const actions ={
-  async  getData(url) {
+   getData(url) {
         fetch(url, {
           headers: {
             "X-Auth-Token": "f26182bf51aa480087e9c34b04cd7e48",
@@ -41,7 +41,7 @@ const actions ={
 }
 
 const mutations={
-    setTeams : (state, teams) => (state.teams = teams)
+    teams : (state, teams) => (state.teams = teams)
 
 };
 

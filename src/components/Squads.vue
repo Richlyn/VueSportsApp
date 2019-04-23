@@ -21,45 +21,49 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "squads",
   data() {
     return {
-      urlTeams: "https://api.football-data.org/v2/competitions/CL/teams",
+      // urlTeams: "https://api.football-data.org/v2/competitions/CL/teams",
       urlSquad: "",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
-      teams: [],
+      // teams: [],
       squads: []
     };
   },
+  components: {
+    ...mapActions(["teams"])
+  },
   methods: {
-    getData(url) {
-      fetch(url, {
-        headers: {
-          "X-Auth-Token": "f26182bf51aa480087e9c34b04cd7e48",
-          "Content-Type": "application/json"
-        }
-      })
-        .then(response => {
-          // eslint-disable-next-line
-          console.log("hello");
-          // eslint-disable-next-line
-          console.log(response);
-          return response.json();
-        })
-        .then(data => {
-          this.teams = data.teams; //pulls the match with index 0
-          // eslint-disable-next-line
-          console.log("i fetched" + data);
-          // eslint-disable-next-line
-          console.log("teams", this.teams);
-          // eslint-disable-next-line
-          //    console.log("squad", this.squad);
-        })
-        // eslint-disable-next-line
-        .catch(err => console.log(err));
-      this.getData(this.proxyUrl + this.urlTeams);
-    },
+    // getData(url) {
+    //   fetch(url, {
+    //     headers: {
+    //       "X-Auth-Token": "f26182bf51aa480087e9c34b04cd7e48",
+    //       "Content-Type": "application/json"
+    //     }
+    //   })
+    //     .then(response => {
+    //       // eslint-disable-next-line
+    //       console.log("hello");
+    //       // eslint-disable-next-line
+    //       console.log(response);
+    //       return response.json();
+    //     })
+    //     .then(data => {
+    //       this.teams = data.teams; //pulls the match with index 0
+    //       // eslint-disable-next-line
+    //       console.log("i fetched" + data);
+    //       // eslint-disable-next-line
+    //       console.log("teams", this.teams);
+    //       // eslint-disable-next-line
+    //       //    console.log("squad", this.squad);
+    //     })
+    //     // eslint-disable-next-line
+    //     .catch(err => console.log(err));
+    //   this.getData(this.proxyUrl + this.urlTeams);
+    // },
 
     getDataPlayers(url) {
       fetch(url, {
@@ -95,10 +99,10 @@ export default {
       // eslint-disable-next-line
       console.log(this.urlSquad);
     }
-  },
-  mounted() {
-    this.getData(this.proxyUrl + this.urlTeams);
   }
+  // mounted() {
+  //   this.getData(this.proxyUrl + this.urlTeams);
+  // }
 };
 </script>
 

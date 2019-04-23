@@ -18,7 +18,7 @@
 
 <script>
 // import Squads from "@/components/Squads.vue";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "teamsinfo",
@@ -27,7 +27,11 @@ export default {
   // },
 
   methods: {
-    ...mapActions(["teams"])
+    ...mapActions(["getData"])
+  },
+  computed: mapGetters(["teams"]),
+  created() {
+    this.getData(this.proxyUrl + this.urlTeams);
   }
 };
 </script>
