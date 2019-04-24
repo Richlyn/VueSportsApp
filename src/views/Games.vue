@@ -93,12 +93,6 @@ export default {
         })
         // eslint-disable-next-line
         .catch(err => console.log(err));
-    },
-    onSlideStart(slide) {
-      this.sliding = true;
-    },
-    onSlideEnd(slide) {
-      this.sliding = false;
     }
   },
 

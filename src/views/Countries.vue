@@ -5,13 +5,13 @@
       width="100%"
       height="480"
     ></iframe>
-    <h4>List of Countries</h4>
+    <!-- <h4>List of Countries</h4>
     <div v-for="team in teams" :key="team.id">
       <li>
         <img class="crest" :src="team.crestUrl">
         {{team.name}} - {{team.venue}}
       </li>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -66,5 +66,12 @@ export default {
 }
 li {
   text-decoration: none;
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (min-width: 700px) {
+  iframe {
+    max-width: 80%;
+    max-height: 80%;
+  }
 }
 </style>

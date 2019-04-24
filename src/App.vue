@@ -10,7 +10,7 @@
     <div class="topnav" id="myTopnav">
       <a href="/" class="active">Home</a>
       <a href="/games">Games</a>
-      <a href="/teamsinfo">Teams</a>
+      <a href="/teamsinfo">Clubs</a>
       <a href="/countries">Countries</a>
       <div class="dropdown">
         <button class="dropbtn">
