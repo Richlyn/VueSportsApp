@@ -1,22 +1,23 @@
 <template>
   <div>
-    <b-button v-b-toggle.collapse-1-inner size="sm" v-on:click="getSquads(team)">Players</b-button>
-    <b-card v-for="squad in squads" :key="squad.id">
-      <b-list-group>
-        <b-list-group-item button>
-          Name:
-          {{squad.name}}, ({{squad.shirtNumber}})
-        </b-list-group-item>
-        <b-list-group-item button>
-          Position:
-          {{squad.position}}
-        </b-list-group-item>
-        <b-list-group-item button disabled>
-          Country of Birth:
-          {{squad.countryOfBirth}}
-        </b-list-group-item>
-      </b-list-group>
-    </b-card>
+    <b-button v-b-toggle.collapse-1 size="sm" v-on:click="getSquads(team)">Players</b-button>
+    <div v-for="squad in squads" :key="squad.id">
+      <b-collapse id="collapse-1" class="mt-2">
+        <b-card>
+          <div class="card-text">
+            Position:
+            {{squad.position}}
+            <p>
+              Name:
+              {{squad.name}}, ({{squad.shirtNumber}})
+              Country of Birth:
+              {{squad.countryOfBirth}}
+              Shirt Number
+            </p>
+          </div>
+        </b-card>
+      </b-collapse>
+    </div>
   </div>
 </template>
 

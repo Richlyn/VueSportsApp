@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <div>
-          <b-dropdown split text="Teams" id="dropdown" class="m-2">
-            <b-dropdown-item href="#">teams</b-dropdown-item>
-          </b-dropdown>
-    </div>-->
-
     <iframe
       width="100%"
       height="315px"
@@ -24,6 +18,8 @@
         </label>
       </div>
     </div>
+
+    <!--matches-->
     <b-card-group deck>
       <div v-for="match in matches" :key="match.id">
         <b-card header>
@@ -33,7 +29,13 @@
               {{match.score.fullTime.homeTeam}} -
               {{match.score.fullTime.awayTeam}}
             </b-list-group-item>
-            <b-list-group-item href="#">{{match.homeTeam.name}} vs. {{match.awayTeam.name}}</b-list-group-item>
+            <div v-for="(team) in matches" :key="team.id">
+              <b-list-group-item href="#">
+                {{match.homeTeam.name}}
+                vs.
+                {{match.awayTeam.name}}
+              </b-list-group-item>
+            </div>
             <b-list-group-item href="#">Match Day:{{match.utcDate}}</b-list-group-item>
           </b-list-group>
 
@@ -51,14 +53,12 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "games",
   data() {
     return {
-      slide: 0,
-      sliding: null,
       urlMatches: "https://api.football-data.org/v2/competitions/CL/matches",
-      urlTeams: "https://api.football-data.org/v2/competitions/CL/teams",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
       matches: [],
       teams: [],
@@ -66,13 +66,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["fetchData"]),
     getData(url) {
       fetch(url, {
         headers: {
           "X-Auth-Token": "f26182bf51aa480087e9c34b04cd7e48",
           "Content-Type": "application/json"
         }
-        // mode: "no-cors"
       })
         .then(response => {
           // eslint-disable-next-line
@@ -83,7 +83,7 @@ export default {
         })
 
         .then(data => {
-          this.matches = data.matches; //pulls the match with index 0
+          this.matches = data.matches;
           // eslint-disable-next-line
           console.log("i fetched" + data);
           // eslint-disable-next-line
@@ -95,23 +95,27 @@ export default {
         .catch(err => console.log(err));
     }
   },
+  computed: { ...mapGetters(["getTeams"]) },
 
-  //find way to join mounting using ( includes & titles )
   mounted() {
     this.getData(this.proxyUrl + this.urlMatches);
-    this.getData(this.proxyUrl + this.urlTeams);
-
-    this.$root.$on("bv::dropdown::show", bvEvent => {
-      console.log("Dropdown is about to be shown", bvEvent);
-    });
+    this.fetchData();
+    // }
+    //     teamCrest (team) {
+    //     this.getDataPlayers(
+    //       this.proxyUrl + this.urlMatches + team.id
+    //     );
   }
 };
 </script>
-<style>
-#dropdown {
-  width: 10%;
+<style scoped>
+img {
   display: flex;
-  justify-items: end;
+  flex-direction: row;
+  vertical-align: top;
+  font-size: 16px;
+  max-width: 50px;
+  max-height: 50px;
 }
 #search input[type="text"] {
   width: 100%;

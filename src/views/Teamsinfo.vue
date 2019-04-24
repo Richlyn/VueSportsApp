@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Clubs/>
+    <Clubs :team="team"/>
   </div>
 </template>
 
@@ -15,19 +15,8 @@ export default {
 </script>
 
 <style scoped>
-img {
-  width: 95%;
-}
-b-list-group-item {
-  text-align: center;
-}
-.btn-secondary {
-  border: black;
-  color: white;
-  cursor: pointer;
-}
 @media (min-width: 30em) and (orientation: landscape) {
-  .teams {
+  body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -35,12 +24,10 @@ b-list-group-item {
   }
 
   @media (min-width: 30em) and (orientation: landscape) {
-    .card {
+    body {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      margin: 10px;
-      width: 400px;
     }
   }
 }

@@ -1,24 +1,16 @@
 <template>
   <div>
-    <div v-for="(team) in getTeams" :key="team.id">
-      <!-- <button :src="team.crestUrl" v-b-toggle.collapse-1>{{team.name}}</button>
-      <!-- <b-button v-b-toggle.collapse-1 :src="team.crestUrl">{{team.name}}</b-button>-->
-      <!--  <b-collapse id="collapse-1" class="mt-2">
-        <b-card>
-          <div class="card-text">
-            <img :src="team.crestUrl">
+    <div class="crests" v-for="(team) in getTeams" :key="team.id">
+      <div>
+        <b-card img-top tag="article" style="max-width: 20rem;" class="mb-2">
+          <p>{{team.name}}</p>
+          <img :src="team.crestUrl">
+          <b-card-text>
             <a :src="team.website">Team website:{{team.website}}</a>
             <p>Team Stadium:{{team.venue}}</p>
-          </div>
+          </b-card-text>
           <Squads :team="team"/>
         </b-card>
-      </b-collapse>-->
-
-      <div class="row">
-        <div class="column">
-          <img :src="team.crestUrl">
-          {{team.name}}
-        </div>
       </div>
     </div>
   </div>
@@ -42,6 +34,22 @@ export default {
 </script>
 
 <style>
+img {
+  display: flex;
+  flex-direction: row;
+  /* text-align: center; */
+  /* padding: 30px; */
+  vertical-align: top;
+  font-size: 16px;
+  max-width: 124px;
+  max-height: 124px;
+}
+.crests {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 125px;
+}
 .row {
   display: flex;
   flex-wrap: wrap;
