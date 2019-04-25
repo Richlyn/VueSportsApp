@@ -38,9 +38,6 @@ const actions = {
       // eslint-disable-next-line
       .catch(err => console.log(err));
   }
-  // mounted() {
-  //     this.getData(this.proxyUrl + this.urlTeams);
-  //   }
 };
 
 const mutations = {
