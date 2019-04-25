@@ -1,80 +1,19 @@
 <template>
   <div class="home">
+    <div class="header">
+      <h2>Champions League</h2>
+    </div>
+
     <div class="jumbotron">
-      <b-jumbotron bg-variant="info" text-variant="white" border-variant="dark">
-        <template slot="header">Keep Up With European Championship</template>
-        <template slot="lead">Find out more about your teams, matches and chat with fellow fanatics.</template>
-        <!-- ideally want this as an alert as well ; look for slide in alerts and pop ups; potentially timed one are also good  -->
-        <!-- <div class="d-flex justify-content-center">
+      <b-jumbotron text-variant="white" border-variant="light">
+        <template slot="header">Don't Miss A Moment</template>
+        <template slot="lead">Get The Latest Here</template>
 
-          <div>
-            <b-button v-b-modal.modal-multi-1>
-              Log in
-              <Input:datetime></Input:datetime>
-            </b-button>
-
-            <b-modal
-              id="modal-multi-1"
-              size="lg"
-              title="First Modal"
-              ok-only
-              no-stacking
-              class="m-1"
-            >
-              <b-button v-b-modal.modal-multi-2>Sign Up</b-button>
-              <p>why is there no writing</p>
-            </b-modal>
-
-            <b-modal id="modal-multi-2" title="Second Modal" ok-only>
-              <p class="my-2">Sign Up</p>
-              <b-button v-b-modal.modal-multi-3 size="sm">Register</b-button>
-            </b-modal>
-            <b-modal id="modal-multi-3" size="sm" title="Third Modal" ok-only>
-              <p class="my-1">Thank you</p>
-            </b-modal>
-        </div>-->
-        <!-- Modal Buttons -->
-        <b-button @click="modalShow = !modalShow" class="m-1">Join Now</b-button>
-        <b-button @click="modalShow = !modalShow" class="m-1">Log In</b-button>
-        <!-- model body-->
-        <b-modal v-model="modalShow">
-          <div class="dropdown-menu">
-            <!-- form-->
-            <form class="px-4 py-3">
-              <div class="form-group">
-                <label for="exampleDropdownFormEmail1">Email address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleDropdownFormEmail1"
-                  placeholder="email@example.com"
-                >
-              </div>
-              <div class="form-group">
-                <label for="exampleDropdownFormPassword1">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="exampleDropdownFormPassword1"
-                  placeholder="Password"
-                >
-              </div>
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                <label class="form-check-label" for="dropdownCheck">Remember me</label>
-              </div>
-              <button type="submit" class="btn btn-primary">Sign in</button>
-            </form>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">New around here? Sign up</a>
-            <a class="dropdown-item" href="#">Forgot password?</a>
-          </div>
-        </b-modal>
         <hr class="my-4">
         <!-- youtube highlight-->
         <iframe
           width="100%"
-          height="315px"
+          height="600px"
           src="https://www.youtube.com/embed/DdTuygoDoSA"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -82,12 +21,97 @@
         ></iframe>
       </b-jumbotron>
     </div>
+    <div class="row">
+      <div class="leftcolumn">
+        <div class="card">
+          <h2>Keep Up With Champions League</h2>
+          <h5>Here is where you keep up to date, Dec 7, 2018</h5>
+          <img class="action" src="../assets/action2.jpg">
+          <p>Find out more about your teams, matches and chat with fellow fanatics.</p>
+        </div>
+        <div class="card">
+          <h2>Introduced in 1955</h2>
+          <h5>From Euro Cup to Champions Club, April 7, 2018</h5>
+          <img class="action" src="../assets/action3.jpg">
+          <p>
+            ...as the European Champion Clubs' Cup, more commonly known as the
+            European Cup, it was initially a straight knockout tournament open only to the champion
+            club of each national championship. The competition took on its current name in 1992,
+            adding a round-robin group stage and allowing multiple entrants from certain countries.
+            It has since been expanded, and while most of Europe's national leagues can still only enter their champion,
+            the strongest leagues now provide up to five teams.Clubs that finish next-in-line
+            in their national league, having not qualified for the Champions League, are eligible for the second-tier UEFA Europa League competition.
+          </p>
+        </div>
+      </div>
+
+      <div class="rightcolumn">
+        <div class="card">
+          <h2>About Champions League</h2>
+          <img class="logo" src="../assets/uefa.png">
+          <p>
+            The UEFA Champions League (abbreviated as UCL) is an annual club football
+            competition organised by the Union of European Football Associations (UEFA)
+            and contested by top-division European clubs. It is one of the most prestigious
+            tournaments in the world and the most prestigious club competition in European
+            football, played by the national league champions (and, for some nations, one or
+            more runners-up) of the strongest UEFA national associations.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Highlights</h3>
+          <div>
+            <iframe
+              width="200"
+              height="200"
+              src="https://www.youtube.com/embed/RAOlAAsaSkQ?start=40"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <p>Barcelona vs Chelsea 2-2</p>
+          </div>
+          <br>
+          <div>
+            <iframe
+              width="200"
+              height="200"
+              src="https://www.youtube.com/embed/2TQWbxxyJUA"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <p>Real Madrid vs Liverpool 3-1</p>
+          </div>
+          <br>
+          <div>
+            <iframe
+              width="200"
+              height="200"
+              src="https://www.youtube.com/embed/iBINYZvM6Eo"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <p>BARCELONA 2-0 INTER</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Follow Us</h3>
+          <Social/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
  <script>
+import Social from "@/components/Social.vue";
 export default {
   name: "home",
+  components: {
+    Social
+  },
   data() {
     return {
       modalShow: false
@@ -101,5 +125,78 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+.jumbotron {
+  background-color: #191970;
+
+  border-color: white;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+.logo {
+  width: 100px;
+  margin: auto;
+}
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.action {
+  background-color: black;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn,
+  .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
 </style>

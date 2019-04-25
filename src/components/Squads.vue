@@ -10,9 +10,10 @@
             <p>
               Name:
               {{squad.name}}, ({{squad.shirtNumber}})
+            </p>
+            <p>
               Country of Birth:
               {{squad.countryOfBirth}}
-              Shirt Number
             </p>
           </div>
         </b-card>

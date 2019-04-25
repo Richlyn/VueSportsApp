@@ -9,19 +9,9 @@
       allowfullscreen
     ></iframe>
 
-    <!--search bar-->
-    <div class="filter">
-      <div id="search" class="d-flex justify-content-end p-5">
-        <label style="height:0rem">
-          Search here:
-          <input type="text" v-model="search">
-        </label>
-      </div>
-    </div>
-
     <!--matches-->
     <b-card-group deck>
-      <div v-for="match in matches" :key="match.id">
+      <div class="cards" v-for="match in matches" :key="match.id">
         <b-card header>
           {{match.stage}}
           <b-list-group>
@@ -29,16 +19,13 @@
               {{match.score.fullTime.homeTeam}} -
               {{match.score.fullTime.awayTeam}}
             </b-list-group-item>
-            <div v-for="(team) in matches" :key="team.id">
-              <b-list-group-item href="#">
-                {{match.homeTeam.name}}
-                vs.
-                {{match.awayTeam.name}}
-              </b-list-group-item>
-            </div>
+            <b-list-group-item href="#">
+              {{match.homeTeam.name}}
+              vs.
+              {{match.awayTeam.name}}
+            </b-list-group-item>
             <b-list-group-item href="#">Match Day:{{match.utcDate}}</b-list-group-item>
           </b-list-group>
-
           <p class="card-text mt-2"></p>
           <p>{{match.currectMatchday}}</p>
           <p>{{match.status}}</p>
@@ -61,8 +48,7 @@ export default {
       urlMatches: "https://api.football-data.org/v2/competitions/CL/matches",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
       matches: [],
-      teams: [],
-      search: ""
+      teams: []
     };
   },
   methods: {
@@ -117,16 +103,23 @@ img {
   max-width: 50px;
   max-height: 50px;
 }
-#search input[type="text"] {
-  width: 100%;
-
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
+.card-body {
+  margin: auto;
 }
 
-#search input[type="text"]:focus {
-  background-color: #ddd;
-  outline: none;
+@media screen and (max-width: 767px) {
+  .cards {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cards {
+    width: 50%;
+  }
 }
 </style>

@@ -1,7 +1,17 @@
-<template></template>
+<template>
+  <div>
+    <Chatpage/>
+  </div>
+</template>
 
 <script>
-export default {};
+import Chatpage from "@/components/Chatpage.vue";
+export default {
+  name: "Chat",
+  components: {
+    Chatpage
+  }
+};
 </script>
 
 <style>
