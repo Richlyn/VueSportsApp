@@ -19,10 +19,9 @@ const actions = {
       .then(result => {
         // The signed-in user info.
         let user = result.user;
-        console.log("Login successful!");
-        console.log(user.displayName);
+
         this.userName = user.displayName;
-        console.log(user.email);
+
         this.userEmail = user.email;
         commit(this.getPosts());
       })
@@ -32,7 +31,6 @@ const actions = {
   },
 
   writeNewPost() {
-    console.log("in write post");
     const userInput = document.querySelector("input").value;
 
     // A post entry.
@@ -41,8 +39,6 @@ const actions = {
       body: userInput,
       date: new Date().toISOString()
     };
-
-    console.log(postData);
 
     // Get a key for a new Post.
     var newPostKey = firebase
@@ -67,7 +63,6 @@ const actions = {
       .database()
       .ref("posts")
       .on("value", data => {
-        console.log(data.val());
         this.allPosts = data.val();
       });
   }

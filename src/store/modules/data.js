@@ -3,7 +3,8 @@ const state = {
   proxyUrl: "https://cors-anywhere.herokuapp.com/",
   url:
     "https://cors-anywhere.herokuapp.com/https://api.football-data.org/v2/competitions/CL/teams",
-  teams: []
+  teams: [],
+  loading: true
 };
 
 const getters = {
@@ -19,24 +20,16 @@ const actions = {
       }
     })
       .then(response => {
-        // eslint-disable-next-line
-        console.log("hello");
-        // eslint-disable-next-line
-        console.log(response);
         return response.json();
       })
       .then(data => {
-        this.teams = data.teams; //pulls the match with index 0
-        // eslint-disable-next-line
-        console.log("i fetched" + data);
-        // eslint-disable-next-line
-        console.log("teams", this.teams);
-        // eslint-disable-next-line
-        //    console.log("squad", this.squad);
+        this.teams = data.teams;
         commit("teams", data.teams);
+        this.loading = false;
       })
       // eslint-disable-next-line
       .catch(err => console.log(err));
+    this.loading = true;
   }
 };
 

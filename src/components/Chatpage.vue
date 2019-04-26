@@ -23,8 +23,6 @@
           <div id="posts" class="card-body">
             <h5 class="card-title">Champs Chat</h5>
             <div class="messages">
-              <!-- <div class="msg_left"> </div>
-              <div class="msg_right"> </div>-->
               <div v-for="post in allPosts" :key="post.id">
                 <div class="bg-light">
                   {{post.author}}:
@@ -36,7 +34,7 @@
               </div>
             </div>
             <input type="text" placeholder="write here">
-            <b-button variant="primary" v-on:click="writeNewPost(),clearField();">Send</b-button>
+            <b-button variant="primary" v-on:click="writeNewPost()">Send</b-button>
           </div>
         </b-tab>
         <b-tab title="FC Barcelona">
@@ -54,57 +52,40 @@
               </div>
             </div>
             <input type="text" placeholder="write here">
-            <b-button variant="primary" v-on:click="writeNewPost(),clearField();">Send</b-button>
+            <b-button variant="primary" v-on:click="writeNewPost()">Send</b-button>
           </div>
         </b-tab>
         <b-tab title="Manchester">
           <div id="posts" class="card-body">
             <h5 class="card-title">Champs Chat</h5>
-            <!-- <div class="messages">
+            <div class="messages">
               <div v-for="post in allPosts" :key="post.id">
-                <div class="bg-light">
-                  {{post.author}}:
-                  {{post.body}}
-                </div>
-                <div class="bg-light">
-                  <p>Date:{{post.date}}</p>
-                </div>
-              </div>
-            </div>-->
-
-            <div class="container">
-              <div class="msg_left">
-                <div class="messages">
-                  <div v-for="post in allPosts" :key="post.id">
-                    <div class="bg-light">
-                      {{post.author}}:
-                      {{post.body}}
-                    </div>
-                    <div class="bg-light">
-                      <p>Date:{{post.date}}</p>
-                    </div>
+                <div class="msg_left" v-if="post.author != username">
+                  <div class="bg-light">
+                    {{post.author}}:
+                    {{post.body}}
+                  </div>
+                  <div class="bg-light">
+                    <p>Date:{{post.date}}</p>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="container darker">
-              <div class="msg_right">
-                <div class="messages">
-                  <div v-for="post in allPosts" :key="post.id">
-                    <div class="bg-light">
-                      {{post.author}}:
-                      {{post.body}}
-                    </div>
-                    <div class="bg-light">
-                      <p>Date:{{post.date}}</p>
-                    </div>
+            <div class="messages">
+              <div v-for="post in allPosts" :key="post.id">
+                <div class="msg_right" v-if="post.author == username">
+                  <div class="bg-light">
+                    {{post.author}}:
+                    {{post.body}}
+                  </div>
+                  <div class="bg-light">
+                    <p>Date:{{post.date}}</p>
                   </div>
                 </div>
               </div>
             </div>
             <input type="text" placeholder="write here">
-            <b-button variant="primary" v-on:click="writeNewPost(),clearField();">Send</b-button>
+            <b-button variant="primary" v-on:click="writeNewPost()">Send</b-button>
           </div>
         </b-tab>
       </b-tabs>
@@ -155,6 +136,7 @@ export default {
     writeNewPost() {
       console.log("in write post");
       const userInput = document.querySelector("input").value;
+      document.querySelector("input").value = "";
 
       // A post entry.
       var postData = {
@@ -207,7 +189,7 @@ export default {
 }
 input[type="text"] {
   width: 100%;
-  height: 100px;
+  height: 50px;
   display: inline-block;
   border: greenyellow;
   background: #f1f1f1;
@@ -222,7 +204,7 @@ input[type="text"]:focus {
   width: 100%;
 }
 .messages {
-  height: 400px;
+  height: 200px;
   overflow-y: auto;
 }
 

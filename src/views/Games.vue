@@ -67,31 +67,16 @@ export default {
         }
       })
         .then(response => {
-          // eslint-disable-next-line
-          console.log("hello");
-          // eslint-disable-next-line
-          console.log(response);
           return response.json();
-          this.loading = false;
         })
 
         .then(data => {
           this.matches = data.matches;
-          // eslint-disable-next-line
-          console.log("i fetched" + data);
-          // eslint-disable-next-line
-          console.log("matches", this.matches);
-          // eslint-disable-next-line
-          console.log("TEAMS", this.teams);
           this.loading = false;
         })
         // eslint-disable-next-line
         .catch(err => console.log(err));
       this.loading = true;
-    },
-    hideLoader() {
-      console.log("loader");
-      document.querySelector("loading").style.display = "none";
     }
   },
   computed: { ...mapGetters(["getTeams"]) },
