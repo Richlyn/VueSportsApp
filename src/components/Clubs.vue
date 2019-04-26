@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="loader">
+      <b-spinner v-on:load="hideLoader()" label="Loading..."></b-spinner>
+    </div>
     <div class="leftcolumn">
       <div class="cards" v-for="(team) in getTeams" :key="team.id">
         <b-card img-top tag="article">
@@ -16,7 +19,7 @@
 
     <div class="rightcolumn">
       <div class="card">
-        <h3>Last 3 Winning Teams</h3>
+        <h3>Last 3 Years</h3>
         <div>
           <p>Real Madrid C.F. 2018</p>
         </div>
@@ -42,7 +45,13 @@ export default {
   components: {
     Squads
   },
-  methods: { ...mapActions(["fetchData"]) },
+  methods: {
+    ...mapActions(["fetchData"]),
+    hideLoader() {
+      console.log("loader");
+      document.querySelector("loading").style.display = "none";
+    }
+  },
   computed: { ...mapGetters(["getTeams"]) },
   mounted() {
     this.fetchData();
@@ -51,6 +60,11 @@ export default {
 </script>
 
 <style>
+.spinner {
+  text-align: center;
+  margin: auto;
+}
+
 img {
   vertical-align: top;
   font-size: 16px;

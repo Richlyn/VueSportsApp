@@ -118,9 +118,8 @@ img {
 }
 
 @media screen and (min-width: 768px) {
-  .leftcolumn {
-    float: left;
-    width: 75%;
+  .cards {
+    width: 50%;
   }
 }
 </style>
