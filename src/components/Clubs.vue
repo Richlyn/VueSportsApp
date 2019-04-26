@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="loader">
-      <b-spinner v-on:load="hideLoader()" label="Loading..."></b-spinner>
-    </div>
     <div class="leftcolumn">
+      <div class="text-center">
+        <b-spinner v-if="loading" label="Loading..."></b-spinner>
+      </div>
       <div class="cards" v-for="(team) in getTeams" :key="team.id">
         <b-card img-top tag="article">
           <p>{{team.name}}</p>
@@ -19,7 +19,7 @@
 
     <div class="rightcolumn">
       <div class="card">
-        <h3>Last 3 Years</h3>
+        <h3>Past Winners</h3>
         <div>
           <p>Real Madrid C.F. 2018</p>
         </div>
@@ -30,6 +30,38 @@
         <br>
         <div>
           <p>Real Madrid C.F. 2016</p>
+        </div>
+        <br>
+        <div>
+          <p>FC Barcelona 2015</p>
+        </div>
+        <br>
+        <div>
+          <p>Real Madrid C.F. 2014</p>
+        </div>
+        <br>
+        <div>
+          <p>FC Bayern Munich 2013</p>
+        </div>
+        <br>
+        <div>
+          <p>Chelsea FC 2012</p>
+        </div>
+        <br>
+        <div>
+          <p>FC Barcelona 2011</p>
+        </div>
+        <br>
+        <div>
+          <p>Inter Milan 2010</p>
+        </div>
+        <br>
+        <div>
+          <p>FC Barcelona 2009</p>
+        </div>
+        <br>
+        <div>
+          <p>Manchester United FC 2008</p>
         </div>
       </div>
     </div>
@@ -45,16 +77,18 @@ export default {
   components: {
     Squads
   },
+  data() {
+    return {
+      loading: true
+    };
+  },
   methods: {
-    ...mapActions(["fetchData"]),
-    hideLoader() {
-      console.log("loader");
-      document.querySelector("loading").style.display = "none";
-    }
+    ...mapActions(["fetchData"])
   },
   computed: { ...mapGetters(["getTeams"]) },
   mounted() {
     this.fetchData();
+    this.loading = false;
   }
 };
 </script>
@@ -94,6 +128,7 @@ img {
     float: left;
     width: 25%;
     padding-left: 20px;
+    text-align: center;
   }
 }
 </style>

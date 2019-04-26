@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div class="iframe">
-      <iframe
-        width="100%"
-        height="315"
-        src="https://www.youtube.com/embed/gTzDmjTeV2U?start=111"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+    <div v-if="video == true">
+      <div class="iframe">
+        <iframe
+          width="100%"
+          height="315"
+          src="https://www.youtube.com/embed/gTzDmjTeV2U?start=111"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
     <p class="h3 mt-5">Chat With Other Fans</p>
     <p>By Logging In</p>
@@ -21,8 +23,10 @@
           <div id="posts" class="card-body">
             <h5 class="card-title">Champs Chat</h5>
             <div class="messages">
+              <!-- <div class="msg_left"> </div>
+              <div class="msg_right"> </div>-->
               <div v-for="post in allPosts" :key="post.id">
-                <div class="bg-light float-right">
+                <div class="bg-light">
                   {{post.author}}:
                   {{post.body}}
                 </div>
@@ -32,7 +36,7 @@
               </div>
             </div>
             <input type="text" placeholder="write here">
-            <b-button variant="primary" v-on:click="writeNewPost()">Send</b-button>
+            <b-button variant="primary" v-on:click="writeNewPost(),clearField();">Send</b-button>
           </div>
         </b-tab>
         <b-tab title="FC Barcelona">
@@ -40,7 +44,7 @@
             <h5 class="card-title">Champs Chat</h5>
             <div class="messages">
               <div v-for="post in allPosts" :key="post.id">
-                <div class="bg-light float-right">
+                <div class="bg-light">
                   {{post.author}}:
                   {{post.body}}
                 </div>
@@ -50,15 +54,15 @@
               </div>
             </div>
             <input type="text" placeholder="write here">
-            <b-button variant="primary" v-on:click="writeNewPost()">Send</b-button>
+            <b-button variant="primary" v-on:click="writeNewPost(),clearField();">Send</b-button>
           </div>
         </b-tab>
         <b-tab title="Manchester">
           <div id="posts" class="card-body">
             <h5 class="card-title">Champs Chat</h5>
-            <div class="messages">
+            <!-- <div class="messages">
               <div v-for="post in allPosts" :key="post.id">
-                <div class="bg-light float-right">
+                <div class="bg-light">
                   {{post.author}}:
                   {{post.body}}
                 </div>
@@ -66,9 +70,41 @@
                   <p>Date:{{post.date}}</p>
                 </div>
               </div>
+            </div>-->
+
+            <div class="container">
+              <div class="msg_left">
+                <div class="messages">
+                  <div v-for="post in allPosts" :key="post.id">
+                    <div class="bg-light">
+                      {{post.author}}:
+                      {{post.body}}
+                    </div>
+                    <div class="bg-light">
+                      <p>Date:{{post.date}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container darker">
+              <div class="msg_right">
+                <div class="messages">
+                  <div v-for="post in allPosts" :key="post.id">
+                    <div class="bg-light">
+                      {{post.author}}:
+                      {{post.body}}
+                    </div>
+                    <div class="bg-light">
+                      <p>Date:{{post.date}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <input type="text" placeholder="write here">
-            <b-button variant="primary" v-on:click="writeNewPost()">Send</b-button>
+            <b-button variant="primary" v-on:click="writeNewPost(),clearField();">Send</b-button>
           </div>
         </b-tab>
       </b-tabs>
@@ -87,7 +123,8 @@ export default {
       userName: "",
       userEmail: "",
       allPosts: {},
-      chatRoom: false
+      chatRoom: false,
+      video: true
     };
   },
   methods: {
@@ -107,6 +144,7 @@ export default {
           console.log(user.email);
           this.userEmail = user.email;
           this.chatRoom = true;
+          this.video = false;
           this.getPosts();
         })
 
@@ -153,6 +191,9 @@ export default {
           console.log(data.val());
           this.allPosts = data.val();
         });
+    },
+    clearField() {
+      document.getElementByTag("input").value = "";
     }
   }
 };
@@ -183,6 +224,24 @@ input[type="text"]:focus {
 .messages {
   height: 400px;
   overflow-y: auto;
+}
+
+.msg_left,
+.msg_right {
+  display: block;
+  clear: both;
+}
+.msg_right {
+  background-color: blue;
+  padding: 10px 5px;
+  display: block;
+  float: right;
+}
+.msg_left {
+  background-color: green;
+  padding: 10px 5px;
+  display: block;
+  float: left;
 }
 .iframe {
   margin: auto;

@@ -9,6 +9,10 @@
       allowfullscreen
     ></iframe>
 
+    <div class="text-center">
+      <b-spinner v-if="loading" label="Loading..."></b-spinner>
+    </div>
+
     <!--matches-->
     <b-card-group deck>
       <div class="cards" v-for="match in matches" :key="match.id">
@@ -48,11 +52,13 @@ export default {
       urlMatches: "https://api.football-data.org/v2/competitions/CL/matches",
       proxyUrl: "https://cors-anywhere.herokuapp.com/",
       matches: [],
-      teams: []
+      teams: [],
+      loading: true
     };
   },
   methods: {
     ...mapActions(["fetchData"]),
+
     getData(url) {
       fetch(url, {
         headers: {
@@ -66,6 +72,7 @@ export default {
           // eslint-disable-next-line
           console.log(response);
           return response.json();
+          this.loading = false;
         })
 
         .then(data => {
@@ -76,9 +83,15 @@ export default {
           console.log("matches", this.matches);
           // eslint-disable-next-line
           console.log("TEAMS", this.teams);
+          this.loading = false;
         })
         // eslint-disable-next-line
         .catch(err => console.log(err));
+      this.loading = true;
+    },
+    hideLoader() {
+      console.log("loader");
+      document.querySelector("loading").style.display = "none";
     }
   },
   computed: { ...mapGetters(["getTeams"]) },
@@ -86,11 +99,6 @@ export default {
   mounted() {
     this.getData(this.proxyUrl + this.urlMatches);
     this.fetchData();
-    // }
-    //     teamCrest (team) {
-    //     this.getDataPlayers(
-    //       this.proxyUrl + this.urlMatches + team.id
-    //     );
   }
 };
 </script>
