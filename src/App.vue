@@ -8,12 +8,12 @@
     >
 
     <div class="topnav" id="myTopnav">
-      <a href="/" class="active">Home</a>
-      <a href="/games">Games</a>
-      <a href="/teamsinfo">Clubs</a>
-      <a href="/countries">Countries</a>
-      <a href="/chat">Chat</a>
-      <a href="javascript:void(0);" class="icon" v-on:click="myFunction">&#9776;</a>
+      <b-link to="/" class="active">Home</b-link>
+      <b-link to="/games">Games</b-link>
+      <b-link to="/teamsinfo">Clubs</b-link>
+      <b-link to="/countries">Countries</b-link>
+      <b-link to="/chat">Chat</b-link>
+      <b-link href="javascript:void(0);" class="icon" v-on:click="myFunction">&#9776;</b-link>
     </div>
     <router-view/>
     <Footer/>
